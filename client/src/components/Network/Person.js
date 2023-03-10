@@ -16,6 +16,9 @@ const Person = ({ friend }) => {
         await axios.put("/users/" + friend._id + "/follow", { userId: user._id });
         dispatch({ type: "FOLLOW", payload: friend._id });
         setIsConnected(true);
+        try {
+            await axios.post("/conversations",{"senderId":user._id,"receiverId":friend._id})
+          } catch (err) {console.log(err)}
       } else {
         await axios.put("/users/" + friend._id + "/unfollow", { userId: user._id });
         dispatch({ type: "UNFOLLOW", payload: friend._id });

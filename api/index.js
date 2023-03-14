@@ -9,6 +9,7 @@ const authRouter = require("./routes/auth");
 const postRouter = require("./routes/posts");
 const conversationRouter = require("./routes/conversations");
 const messageRouter = require("./routes/messages");
+const jobRouter = require("./routes/jobs");
 const cors = require("cors");
 const multer = require("multer");
 const path = require("path");
@@ -50,6 +51,7 @@ app.use(express.json());
 app.use(helmet());
 app.use(morgon("common"));
 
+app.use("/api/jobs",jobRouter);
 app.use("/api/users", userRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/posts", postRouter);

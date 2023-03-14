@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
+const { ObjectId } = mongoose.Schema.Types;
 
-const userSchema = new mongoose.Schema(
+const companySchema = new mongoose.Schema(
   {
     username: {
       type: String,
@@ -29,42 +30,33 @@ const userSchema = new mongoose.Schema(
       required: true,
       min: 6,
     },
-    phone_no: {
+    city:{
+        type:String
+    },
+    contact_no: {
       type: Number,
       required: true,
     },
-    qualification: {
-      type: String,
+    employees_no: {
+      type: Number,
       required: true,
     },
-    profilePicture: {
-      type: String,
-      default: "",
+    description:{
+        type:String,
+        required:true,
     },
-    experience: {
-      type: Number,
-    },
-    current_ctc: {
-      type: Number,
-    },
-    expected_ctc: {
-      type: Number,
-    },
-    notice_period: {
-      type: Number,
-    },
-    resume: {
+    field: {
       type: String,
     },
-    isOpenToWork: {
-      type: Boolean,
-      default: false,
-    },
-    following:{
-      type:Array
-    },
+    recent_jobs:[
+        {
+            id:{type:ObjectId,ref:"jobs"},
+            desc:{type:String},
+            prof_pic:{type:String,default:""}
+        }
+    ]
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("Com", companySchema);

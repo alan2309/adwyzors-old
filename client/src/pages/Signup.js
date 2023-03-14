@@ -7,6 +7,11 @@ const Signup = () => {
   const username = useRef();
   const email = useRef();
   const password = useRef();
+  const name = useRef()
+  const address = useRef();
+  const phone_no = useRef();
+  const qualification = useRef();
+  const experience = useRef();
 
   const navigate = useNavigate();
 
@@ -16,6 +21,11 @@ const Signup = () => {
       username:username.current.value,
       email:email.current.value,
       password:password.current.value,
+      name:name.current.value,
+      address:address.current.value,
+      phone_no:phone_no.current.value,
+      qualification:qualification.current.value,
+      experience:experience.current.value
     }
     try{
       await axios.post("/auth/register",user);
@@ -50,6 +60,21 @@ const Signup = () => {
             </div>
             <div>
               <Input type="password" required minLength="6" placeholder="Password" ref={password}/>
+            </div>
+            <div>
+              <Input type="text" required placeholder="address" ref={address}/>
+            </div>
+            <div>
+              <Input type="text" required placeholder="name" ref={name}/>
+            </div>
+            <div>
+              <Input type="number" required placeholder="phone_no" ref={phone_no}/>
+            </div>
+            <div>
+              <Input type="text" required placeholder="qualification" ref={qualification}/>
+            </div>
+            <div>
+              <Input type="number" required placeholder="experience" ref={experience}/>
             </div>
             <div>
               <Button type="submit">

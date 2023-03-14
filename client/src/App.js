@@ -6,6 +6,8 @@ import Signup from "./pages/Signup";
 import { AuthContext } from "./context/AuthContext";
 import Network from "./pages/Network";
 import Messaging from "./pages/Messaging";
+import Jobs from "./pages/Jobs";
+import JobDetail from "./pages/JobDetail";
 
 function App() {
 
@@ -19,6 +21,8 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/network" element={<Network />} />
         <Route path="/messaging" element={<Messaging />} />
+        <Route path="/jobs/details/:jid" element={<JobDetail />} />
+        <Route path="/jobs" element={<Jobs />} />
         {/* <Route path="/signup" element={user?<Navigate to="/" />:<Signup />} /> */}
       </Routes>
     </Router>

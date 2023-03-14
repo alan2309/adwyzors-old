@@ -17,6 +17,10 @@ const postSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
+    isApproved:{
+      type:Boolean,
+      default:true,
+    }
   },
   { timestamps: true }
 );

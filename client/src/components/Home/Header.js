@@ -11,6 +11,7 @@ const Header = ({page}) => {
   const activeClass = page === 'home' ? 'active' : '';
   const activeClass2 = page === 'network' ? 'active' : '';
   const activeClass3 = page === 'messaging' ? 'active' : '';
+  const activeClass4 = page === 'jobs'?'active':'';
 
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
@@ -44,11 +45,11 @@ const Header = ({page}) => {
                 <span>My Network</span>
               </Link>
             </NavList>
-            <NavList>
-              <a>
-                <img src={PF+"/nav-jobs.svg"} alt="icon" />
+            <NavList className={activeClass4}>
+            <Link to="/jobs">
+                <img src={activeClass4==="active"?(PF+"/nav-jobs-active.svg"):(PF+"/nav-jobs.svg")} alt="icon" />
                 <span>Jobs</span>
-              </a>
+            </Link>
             </NavList>
             <NavList className={activeClass3}>
               <Link to="/messaging">

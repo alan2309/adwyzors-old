@@ -9,12 +9,12 @@ const RightSide = () => {
       <FollowCard>
         <Title>
           <h2>Add to your feed</h2>
-          <img src={PF+"/feed-icon.svg"} alt="icon" />
+          <img src={PF + "/feed-icon.svg"} alt="icon" />
         </Title>
-        
+
         <FeedList>
           <li>
-            <a>
+            <a href="/">
               <Avatar />
             </a>
             <div>
@@ -23,7 +23,7 @@ const RightSide = () => {
             </div>
           </li>
           <li>
-            <a>
+            <a href="/">
               <Avatar />
             </a>
             <div>
@@ -35,7 +35,7 @@ const RightSide = () => {
 
         <Recommendation>
           View all recommmendations
-          <img src={PF+"/right-icon.svg"} alt="icon" />
+          <img src={PF + "/right-icon.svg"} alt="icon" />
         </Recommendation>
       </FollowCard>
       <BannerCard>
@@ -71,15 +71,15 @@ const Title = styled.div`
   font-size: 16px;
   width: 100%;
   color: rgba(0, 0, 0, 0.6);
-  h2{
-    margin:10px;
+  h2 {
+    margin: 10px;
   }
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 `;
 
 const FeedList = styled.ul`
   margin-top: 16px;
-  padding-left:10px;
+  padding-left: 10px;
   li {
     display: flex;
     align-items: center;

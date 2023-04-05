@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
-import axios from "axios";
 import { format } from "timeago.js";
 import { AuthContext } from "../../context/AuthContext";
+import axiosInstance from "../../axios";
 
 const Post = ({ post }) => {
   const desc = post.desc;
@@ -12,13 +12,13 @@ const Post = ({ post }) => {
   const [user, setUser] = useState({});
   const { user: currentUser } = useContext(AuthContext);
 
-  useEffect (()=>{
+  useEffect(() => {
     setIsLiked(post.likes.includes(currentUser._id));
-  },[post.likes, currentUser._id]);
+  }, [post.likes, currentUser._id]);
 
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await axios.get("users?userId=" + post.userId);
+      const res = await axiosInstance.get("users?userId=" + post.userId);
       setUser(res.data);
     };
     fetchUser();
@@ -26,7 +26,9 @@ const Post = ({ post }) => {
 
   const likeHandler = () => {
     try {
-      axios.put("/posts/" + post._id + "/like", { userId: currentUser._id });
+      axiosInstance.put("/posts/" + post._id + "/like", {
+        userId: currentUser._id,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -39,7 +41,7 @@ const Post = ({ post }) => {
     <>
       <Article>
         <SharedActor>
-          <a>
+          <a href="/">
             <img src={user.profilePicture || PF + "/user.svg"} alt="" />
             <div>
               <span>{user.username}</span>
@@ -48,13 +50,13 @@ const Post = ({ post }) => {
             </div>
           </a>
           <button>
-            <img src={PF+"/ellipsis.svg"} alt="ellipsis" />
+            <img src={PF + "/ellipsis.svg"} alt="ellipsis" />
           </button>
         </SharedActor>
         <Description>{desc}</Description>
         <SharedImg>
-          <a>
-            <img src={PF+"/"+post.img} alt="user" />
+          <a href="/">
+            <img src={PF + "/" + post.img} alt="user" />
           </a>
         </SharedImg>
         <SocialCounts>
@@ -72,24 +74,44 @@ const Post = ({ post }) => {
             </button>
           </li>
           <li>
-            <a>2 comments</a>
+            <a href="/">2 comments</a>
           </li>
         </SocialCounts>
         <SocialActions>
-          <button onClick={likeHandler} style={{padding:0}}>
-            <img src={isLiked?PF+"/liked.png":"https://img.icons8.com/external-kmg-design-detailed-outline-kmg-design/20/000000/external-like-feedback-kmg-design-detailed-outline-kmg-design.png"} />
-            {isLiked?<span style={{color:"#0a66c2"}}>Like</span>:<span style={{color:"rgba(0,0,0,0.9 )"}}>Like</span>}
+          <button onClick={likeHandler} style={{ padding: 0 }}>
+            <img
+              alt="img"
+              src={
+                isLiked
+                  ? PF + "/liked.png"
+                  : "https://img.icons8.com/external-kmg-design-detailed-outline-kmg-design/20/000000/external-like-feedback-kmg-design-detailed-outline-kmg-design.png"
+              }
+            />
+            {isLiked ? (
+              <span style={{ color: "#0a66c2" }}>Like</span>
+            ) : (
+              <span style={{ color: "rgba(0,0,0,0.9 )" }}>Like</span>
+            )}
           </button>
           <button>
-            <img src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/20/000000/external-comment-chat-flatart-icons-outline-flatarticons-2.png" />
-            <span >Comments</span>
+            <img
+              alt="img"
+              src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/20/000000/external-comment-chat-flatart-icons-outline-flatarticons-2.png"
+            />
+            <span>Comments</span>
           </button>
           <button>
-            <img src="https://img.icons8.com/external-prettycons-lineal-prettycons/20/000000/external-forward-essentials-prettycons-lineal-prettycons.png" />
+            <img
+              alt="img"
+              src="https://img.icons8.com/external-prettycons-lineal-prettycons/20/000000/external-forward-essentials-prettycons-lineal-prettycons.png"
+            />
             <span>Share</span>
           </button>
           <button>
-            <img src="https://img.icons8.com/external-outline-juicy-fish/20/000000/external-send-contact-us-outline-outline-juicy-fish.png" />
+            <img
+              alt="img"
+              src="https://img.icons8.com/external-outline-juicy-fish/20/000000/external-send-contact-us-outline-outline-juicy-fish.png"
+            />
             <span>Send</span>
           </button>
         </SocialActions>
@@ -233,13 +255,12 @@ const SocialActions = styled.div`
     display: inline-flex;
     align-items: center;
     padding: 8px;
-    
-    
+
     border: none;
     background-color: #fff;
-    img{
-      max-height:28px;
-      max-width:28px;
+    img {
+      max-height: 28px;
+      max-width: 28px;
     }
     @media (min-width: 768px) {
       span {

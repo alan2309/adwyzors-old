@@ -1,19 +1,19 @@
 import styled from "styled-components";
 import React, { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import axios from "axios";
 import Person from "./Person";
+import axiosInstance from "../../axios";
 
 const Main = () => {
   const [friends, setFriends] = useState([]);
   const [conntections, setConnections] = useState([]);
   const { user } = useContext(AuthContext);
 
-  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  //  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
   useEffect(() => {
     const fetchFriends = async () => {
-      const res = await axios.get("users/newfriends/" + user._id);
+      const res = await axiosInstance.get("users/newfriends/" + user._id);
       setFriends(res.data);
     };
     fetchFriends();
@@ -21,24 +21,24 @@ const Main = () => {
 
   useEffect(() => {
     const fetchConnections = async () => {
-      const res = await axios.get("users/friends/" + user._id);
+      const res = await axiosInstance.get("users/friends/" + user._id);
       setConnections(res.data);
     };
     fetchConnections();
-  },[user._id]);
+  }, [user._id]);
 
   return (
     <>
       <Container>
         <MainBox>
           <span>
-          <span>Your Connections</span>
-          <span>Manage</span>
+            <span>Your Connections</span>
+            <span>Manage</span>
           </span>
           {conntections.map((conntection) => (
             <Person key={conntection._id} friend={conntection} />
           ))}
-          {conntections.length === 0 && (<h3>You have no connections</h3>)}
+          {conntections.length === 0 && <h3>You have no connections</h3>}
         </MainBox>
         <MainBox>
           <span>
@@ -48,7 +48,7 @@ const Main = () => {
           {friends.map((friend) => (
             <Person key={friend._id} friend={friend} />
           ))}
-          {friends.length === 0 && (<h3>No connections available to connect</h3>)}
+          {friends.length === 0 && <h3>No connections available to connect</h3>}
         </MainBox>
       </Container>
     </>

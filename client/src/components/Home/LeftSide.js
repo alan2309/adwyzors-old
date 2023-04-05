@@ -1,22 +1,26 @@
 import styled from "styled-components";
-import {AuthContext} from '../../context/AuthContext'
-import React , {useContext} from "react";
+import { AuthContext } from "../../context/AuthContext";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 
 const LeftSide = () => {
-  const {user} = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   return (
     <Container>
       <ArtCard>
         <UserInfo>
           <CardBackground />
-          <a>
-            <Photo src={user.profilePicture || PF+ "/user.svg"} width="120px" height="120px"/>
+          <a href="/">
+            <Photo
+              src={user.profilePicture || PF + "/user.svg"}
+              width="120px"
+              height="120px"
+            />
             {/* <Photo /> */}
             <Link1>{user.username}</Link1>
           </a>
-          <a>
+          <a href="/">
             <AddPhotoText>{user.desc}</AddPhotoText>
           </a>
         </UserInfo>
@@ -26,31 +30,31 @@ const LeftSide = () => {
               <span>Connections</span>
               <span>Grow your network</span>
             </div>
-            <img src={PF+"/widget-icon.svg"} alt="icon" />
+            <img src={PF + "/widget-icon.svg"} alt="icon" />
           </Link>
         </Widget>
         <Item>
           <span>
-            <img src={PF+"/item-icon.svg"} alt="icon" />
+            <img src={PF + "/item-icon.svg"} alt="icon" />
             <span>My Items</span>
           </span>
         </Item>
       </ArtCard>
 
       <CommunityCard>
-        <a>
+        <a href="/">
           <span>Groups</span>
         </a>
-        <a>
+        <a href="/">
           <span>
             Events
-            <img src={PF+"/plus-icon.svg"} alt="plus" />
+            <img src={PF + "/plus-icon.svg"} alt="plus" />
           </span>
         </a>
-        <a>
+        <a href="/">
           <span>Follow Hashtags</span>
         </a>
-        <a>
+        <a href="/">
           <span>Discover more</span>
         </a>
       </CommunityCard>

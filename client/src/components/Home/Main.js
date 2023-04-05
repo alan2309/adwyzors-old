@@ -3,8 +3,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import PostModal from "./PostModel";
 import Post from "./Post";
-import axios from "axios";
-
+import axiosInstance from "../../axios";
 const Main = () => {
   const [showModal, setShowModal] = useState("");
   const [posts, setPosts] = useState([]);
@@ -16,7 +15,7 @@ const Main = () => {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const res = await axios.get("posts/timeline/" + user._id);
+      const res = await axiosInstance.get("posts/timeline/" + user._id);
       setPosts(
         res.data.sort((p1, p2) => {
           return new Date(p2.createdAt) - new Date(p1.createdAt);
@@ -134,7 +133,7 @@ const ShareBox = styled(CommonCard)`
         }
         span {
           font-weight: 600;
-          color: rgba(0,0,0,0.6);
+          color: rgba(0, 0, 0, 0.6);
         }
       }
     }

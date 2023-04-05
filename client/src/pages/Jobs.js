@@ -1,20 +1,18 @@
-import React from 'react'
-import Header from "../components/Common/Header";
+import React from "react";
 import styled from "styled-components";
-import CandJob from '../components/Job/CandJob';
-import CompJob from '../components/Job/CompJob';
+import CompJob from "../components/Job/CompJob";
 
 function Jobs() {
   return (
     <Container>
-        <Layout>
-           <CompJob/>
-        </Layout>
+      <Layout>
+        <CompJob />
+      </Layout>
     </Container>
-  )
+  );
 }
 const Container = styled.div`
-background-color: rgba(0, 0, 0, 0.03);
+  background-color: rgba(0, 0, 0, 0.03);
 `;
 
 const Layout = styled.div`
@@ -26,12 +24,12 @@ const Layout = styled.div`
   row-gap: 15px;
   grid-template-rows: auto;
   margin: 12%;
-  margin-top:0;
+  margin-top: 0;
   margin-bottom: 0;
   padding-top: 60px;
 
   @media (max-width: 768px) {
-    margin:5%;
+    margin: 5%;
     margin-top: 50px;
     display: flex;
     flex-direction: column;
@@ -39,4 +37,4 @@ const Layout = styled.div`
   }
 `;
 
-export default Jobs
+export default Jobs;

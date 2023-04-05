@@ -1,26 +1,37 @@
 import styled from "styled-components";
 import { AuthContext } from "../../context/AuthContext";
-import React, { useContext, useEffect, useState } from "react";
-import axios from "axios";
+import React, { useContext, useState } from "react";
+import axiosInstance from "../../axios";
 
 const Person = ({ friend }) => {
   const { user, dispatch } = useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
-  const [isConnected, setIsConnected] = useState(user.following.includes(friend._id));
+  const [isConnected, setIsConnected] = useState(
+    user.following.includes(friend._id)
+  );
 
   const connectHandler = async () => {
     console.log(isConnected);
     try {
       if (!isConnected) {
-        await axios.put("/users/" + friend._id + "/follow", { userId: user._id });
+        await axiosInstance.put("/users/" + friend._id + "/follow", {
+          userId: user._id,
+        });
         dispatch({ type: "FOLLOW", payload: friend._id });
         setIsConnected(true);
         try {
-            await axios.post("/conversations",{"senderId":user._id,"receiverId":friend._id})
-          } catch (err) {console.log(err)}
+          await axiosInstance.post("/conversations", {
+            senderId: user._id,
+            receiverId: friend._id,
+          });
+        } catch (err) {
+          console.log(err);
+        }
       } else {
-        await axios.put("/users/" + friend._id + "/unfollow", { userId: user._id });
+        await axiosInstance.put("/users/" + friend._id + "/unfollow", {
+          userId: user._id,
+        });
         dispatch({ type: "UNFOLLOW", payload: friend._id });
         setIsConnected(false);
       }
@@ -44,7 +55,11 @@ const Person = ({ friend }) => {
           <p>{friend.desc}</p>
         </UserInfo>
         <Widget>
-          <input type="button" value={isConnected?"remove connection":"connect"} onClick={connectHandler} />
+          <input
+            type="button"
+            value={isConnected ? "remove connection" : "connect"}
+            onClick={connectHandler}
+          />
         </Widget>
       </ArtCard>
     </Container>
@@ -108,11 +123,11 @@ const Link = styled.div`
 
 const Widget = styled.div`
   input[type="button"] {
-    cursor:pointer;
+    cursor: pointer;
     padding: 7px 20px;
     border-radius: 20px;
     border: 1px solid #0a66c2;
-    color:#0a66c2;
+    color: #0a66c2;
     width: 90%;
     margin-bottom: 10px;
     background: transparent;

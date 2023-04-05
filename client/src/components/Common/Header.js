@@ -83,13 +83,13 @@ const Header = ({ page }) => {
               </Link>
             </NavList>
             <NavList>
-              <a>
+              <a href="/">
                 <img src={PF + "/nav-notifications.svg"} alt="icon" />
                 <span>Notifications</span>
               </a>
             </NavList>
             <User>
-              <a>
+              <a href="/">
                 <img src={user.profilePicture || PF + "/user.svg"} alt="user" />
                 <span>
                   Me
@@ -109,7 +109,7 @@ const Header = ({ page }) => {
               </Signout>
             </User>
             <Work>
-              <a>
+              <a href="/">
                 <img src={PF + "/nav-work.svg"} alt="work" />
                 <span>
                   Work

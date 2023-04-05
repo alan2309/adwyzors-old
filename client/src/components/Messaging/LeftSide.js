@@ -1,11 +1,9 @@
 import styled from "styled-components";
-import { AuthContext } from "../../context/AuthContext";
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
 import Contact from "./Contact";
 
 const LeftSide = ({ conversations, setCurrentChat }) => {
-  const { user } = useContext(AuthContext);
+  //  const { user } = useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   return (
     <Container>

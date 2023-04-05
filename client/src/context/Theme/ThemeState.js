@@ -5,7 +5,7 @@ const ThemeState = (props) => {
   let btnColor = "#3E465E";
   let secondaryColor = "#CBD1E4";
   let pastdueColor = "#C00000";
-  const jetBlack = "#2E2F2F";
+  //  const jetBlack = "#2E2F2F";
 
   const greyDefault = "#EAEDF1";
 

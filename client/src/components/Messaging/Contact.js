@@ -1,45 +1,48 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
-import { AuthContext } from '../../context/AuthContext';
-import axios from 'axios';
+import { AuthContext } from "../../context/AuthContext";
+import axiosInstance from "../../axios";
 
-const Contact = ({conversation}) => {
+const Contact = ({ conversation }) => {
+  const { user: currentUser } = useContext(AuthContext);
 
-    const { user:currentUser } = useContext(AuthContext);
+  const [user, setUser] = useState(null);
 
-    const [user, setUser] = useState(null);
+  useEffect(() => {
+    const friendId = conversation.members.filter(
+      (user) => user !== currentUser._id
+    );
+    const getUser = async () => {
+      try {
+        const res = await axiosInstance.get("/users?userId=" + friendId);
+        setUser(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getUser();
+  }, [currentUser, conversation]);
 
-    useEffect(() => {
-      const friendId = conversation.members.filter(user => user !== currentUser._id);
-      const getUser = async () => {
-        try {
-          const res = await axios("/users?userId=" + friendId);
-          setUser(res.data);
-        } catch (err) {
-          console.log(err);
-        }
-      };
-      getUser();
-    }, [currentUser,conversation]);
-
-    const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
   return (
-    <Container><a>
-    <img src={user?.profilePicture || PF + "/user.svg"} alt="" />
-    <div>
-      <span>{user?.username}</span>
-      <span>{user?.desc}</span>
-    </div>
-  </a></Container>
-  )
-}
+    <Container>
+      <a href="/">
+        <img src={user?.profilePicture || PF + "/user.svg"} alt="" />
+        <div>
+          <span>{user?.username}</span>
+          <span>{user?.desc}</span>
+        </div>
+      </a>
+    </Container>
+  );
+};
 
 const Container = styled.div`
-&:hover{
+  &:hover {
     background-color: #f5f5f5;
     border-left: 4px solid green;
-}
+  }
   padding-right: 40px;
   flex-wrap: nowrap;
   padding: 12px 16px 0;
@@ -80,6 +83,6 @@ const Container = styled.div`
       }
     }
   }
-  `;
+`;
 
 export default Contact;

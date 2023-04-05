@@ -1,17 +1,15 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { AuthContext } from '../../context/AuthContext';
-import axios from "axios";
-import {format} from "timeago.js";
+import { format } from "timeago.js";
+import axiosInstance from "../../axios";
 
-const Chat = ({own,message}) => {
-
+const Chat = ({ message }) => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
     const getUser = async () => {
       try {
-        const res = await axios("/users?userId=" + message.sender);
+        const res = await axiosInstance.get("/users?userId=" + message.sender);
         setUser(res.data);
       } catch (err) {
         console.log(err);
@@ -20,18 +18,23 @@ const Chat = ({own,message}) => {
     getUser();
   }, [message]);
 
-    const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
   return (
-    <Container><a>
-    <img src={user?.profilePicture || PF + "/user.svg"} alt="" />
-    <div>
-      <span>{user?.username}<span>.{format(message.createdAt)}</span></span>
-      <span>{message?.text}</span>
-    </div>
-  </a></Container>
-  )
-}
+    <Container>
+      <a href="/">
+        <img src={user?.profilePicture || PF + "/user.svg"} alt="" />
+        <div>
+          <span>
+            {user?.username}
+            <span>.{format(message.createdAt)}</span>
+          </span>
+          <span>{message?.text}</span>
+        </div>
+      </a>
+    </Container>
+  );
+};
 
 const Container = styled.div`
   padding-right: 40px;
@@ -67,21 +70,21 @@ const Container = styled.div`
           font-weight: 500;
           color: rgba(0, 0, 0, 1);
           padding-bottom: 5px;
-          span{
+          span {
             margin-left: 10px;
             font-size: 13px;
-          font-weight: 400;
-          color: rgba(0, 0, 0, 0.6);
+            font-weight: 400;
+            color: rgba(0, 0, 0, 0.6);
           }
         }
         &:nth-child(2) {
-            padding-top: 5px;
+          padding-top: 5px;
           font-size: 15px;
           color: rgba(0, 0, 0, 0.8);
         }
       }
     }
   }
-  `;
+`;
 
 export default Chat;

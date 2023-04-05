@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { AuthContext } from "../../context/AuthContext";
 import React, { useEffect, useState, useContext } from "react";
-import axios from "axios";
+import axiosInstance from "../../axios";
 
 const LeftSide = () => {
   const { user } = useContext(AuthContext);
@@ -9,11 +9,11 @@ const LeftSide = () => {
 
   useEffect(() => {
     const fetchConnections = async () => {
-      const res = await axios.get("users/friends/" + user._id);
+      const res = await axiosInstance.get("users/friends/" + user._id);
       setConnections(res.data);
     };
     fetchConnections();
-  },[user._id]);
+  }, [user._id]);
 
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   return (
@@ -21,7 +21,7 @@ const LeftSide = () => {
       <ArtCard>
         <UserInfo>
           <CardBackground />
-          <a>
+          <a href="/">
             <Photo
               src={user.profilePicture || PF + "/user.svg"}
               width="120px"
@@ -31,7 +31,7 @@ const LeftSide = () => {
           </a>
         </UserInfo>
         <Widget>
-          <a>
+          <a href="/">
             <div>
               <span>Connections</span>
             </div>
@@ -115,8 +115,8 @@ const Widget = styled.div`
       }
     }
 
-    span{
-        color:rgba(0, 0, 0, 0.6)
+    span {
+      color: rgba(0, 0, 0, 0.6);
     }
   }
 
@@ -124,6 +124,5 @@ const Widget = styled.div`
     color: rgba(0, 0, 0, 1);
   }
 `;
-
 
 export default LeftSide;

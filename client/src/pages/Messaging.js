@@ -1,12 +1,10 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
-import Header from "../components/Common/Header";
 import LeftSide from "../components/Messaging/LeftSide";
 import Main from "../components/Messaging/Main";
 import RightSide from "../components/Messaging/RightSide";
 import { AuthContext } from "../context/AuthContext";
-import axios from "axios";
-
+import axiosInstance from "../axios";
 
 const Messaging = () => {
   const { user } = useContext(AuthContext);
@@ -14,11 +12,10 @@ const Messaging = () => {
   const [conversations, setConversations] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
 
-
   useEffect(() => {
     const getConversations = async () => {
       try {
-        const res = await axios.get("/conversations/" + user._id);
+        const res = await axiosInstance.get("/conversations/" + user._id);
         setConversations(res.data);
       } catch (err) {
         console.log(err);
@@ -26,7 +23,6 @@ const Messaging = () => {
     };
     getConversations();
   }, [user._id]);
-
 
   return (
     <>
@@ -36,9 +32,7 @@ const Messaging = () => {
             conversations={conversations}
             setCurrentChat={setCurrentChat}
           />
-          <Main
-            currentChat={currentChat}
-          />
+          <Main currentChat={currentChat} />
           <RightSide />
         </Layout>
       </Container>

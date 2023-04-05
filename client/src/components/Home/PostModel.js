@@ -2,7 +2,7 @@ import { useContext, useRef, useState } from "react";
 import styled from "styled-components";
 import ReactPlayer from "react-player";
 import { AuthContext } from "../../context/AuthContext";
-import axios from "axios";
+import axiosInstance from "../../axios";
 
 const PostModal = (props) => {
   const editorText = useRef();
@@ -42,11 +42,11 @@ const PostModal = (props) => {
       newPost.img = fileName;
       console.log(newPost);
       try {
-        await axios.post("/upload", data);
+        await axiosInstance.post("/upload", data);
       } catch (err) {}
     }
     try {
-      await axios.post("/posts", newPost);
+      await axiosInstance.post("/posts", newPost);
       window.location.reload();
     } catch (err) {
       console.log(err);
@@ -94,7 +94,7 @@ const PostModal = (props) => {
                     </p>
 
                     {sharedImage && (
-                      <img src={URL.createObjectURL(sharedImage)} />
+                      <img src={URL.createObjectURL(sharedImage)} alt="img" />
                     )}
                   </UploadImage>
                 ) : (

@@ -1,39 +1,42 @@
-import React,{useEffect,useState} from 'react'
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from 'axios'
-import {Modal,Button,Form} from 'react-bootstrap'
+import { Modal, Button, Form } from "react-bootstrap";
+import axiosInstance from "../axios";
 
 function JobDetail() {
-    const [job,setJob] = useState({})
-    const [show, setShow] = useState(false);
+  const [job, setJob] = useState({});
+  const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  
-    const { jid } = useParams();
-    useEffect(()=>{
-        const getDetail = async(id)=>{
-            await axios.get(`http://localhost:8800/api/jobs/details/${id}`)
-            .then(res=>{
-                setJob(res.data)
-                console.log(res.data)
-            })
-            .catch(e=>console.log(e))
-        }
-        getDetail(jid);
-    },[])
+  //  const handleShow = () => setShow(true);
 
-    const submitHandler = (e)=>{
-        e.preventDefault();
-        setShow(true);
-    }
+  const { jid } = useParams();
+  useEffect(() => {
+    const getDetail = async (id) => {
+      await axiosInstance
+        .get(`/jobs/details/${id}`)
+        .then((res) => {
+          setJob(res.data);
+          console.log(res.data);
+        })
+        .catch((e) => console.log(e));
+    };
+    getDetail(jid);
+  }, [jid]);
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    setShow(true);
+  };
 
   return (
     <div>
-        <h3>{job.desc}</h3>
-        <p>likes:{job.upvotes} dislikes:{job.downvotes}</p>
-        <button onClick={submitHandler}>Apply</button>
-        <Modal show={show} onHide={handleClose}>
+      <h3>{job.desc}</h3>
+      <p>
+        likes:{job.upvotes} dislikes:{job.downvotes}
+      </p>
+      <button onClick={submitHandler}>Apply</button>
+      <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Enter Details</Modal.Title>
         </Modal.Header>
@@ -64,9 +67,9 @@ function JobDetail() {
             Save Changes
           </Button>
         </Modal.Footer>
-        </Modal>
+      </Modal>
     </div>
-  )
+  );
 }
 
-export default JobDetail
+export default JobDetail;

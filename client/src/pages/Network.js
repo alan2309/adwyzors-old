@@ -1,4 +1,3 @@
-import Header from "../components/Common/Header";
 import styled from "styled-components";
 import LeftSide from "../components/Network/LeftSide";
 import Main from "../components/Network/Main";
@@ -6,18 +5,18 @@ import Main from "../components/Network/Main";
 const Network = () => {
   return (
     <>
-    <Container>
-      <Layout>
-        <LeftSide />
-        <Main />
-      </Layout>
+      <Container>
+        <Layout>
+          <LeftSide />
+          <Main />
+        </Layout>
       </Container>
     </>
   );
 };
 
 const Container = styled.div`
-background-color: rgba(0, 0, 0, 0.05);
+  background-color: rgba(0, 0, 0, 0.05);
 `;
 
 const Layout = styled.div`
@@ -30,16 +29,16 @@ const Layout = styled.div`
   grid-template-rows: auto;
   margin-right: 13%;
   margin-left: 14%;
-  height:700px;
+  height: 700px;
   padding-top: 70px;
 
   @media (max-width: 768px) {
     margin-top: 50px;
     margin-right: 6%;
-  margin-left: 7%;
+    margin-left: 7%;
     display: flex;
     flex-direction: column;
     padding: 0 5px;
   }
 `;
-export default Network
+export default Network;

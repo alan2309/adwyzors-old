@@ -1,13 +1,13 @@
-import axios from "axios";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import axiosInstance from "../axios";
 
 const Signup = () => {
   const username = useRef();
   const email = useRef();
   const password = useRef();
-  const name = useRef()
+  const name = useRef();
   const address = useRef();
   const phone_no = useRef();
   const qualification = useRef();
@@ -18,22 +18,22 @@ const Signup = () => {
   const handleClick = async (e) => {
     e.preventDefault();
     const user = {
-      username:username.current.value,
-      email:email.current.value,
-      password:password.current.value,
-      name:name.current.value,
-      address:address.current.value,
-      phone_no:phone_no.current.value,
-      qualification:qualification.current.value,
-      experience:experience.current.value
-    }
-    try{
-      await axios.post("/auth/register",user);
+      username: username.current.value,
+      email: email.current.value,
+      password: password.current.value,
+      name: name.current.value,
+      address: address.current.value,
+      phone_no: phone_no.current.value,
+      qualification: qualification.current.value,
+      experience: experience.current.value,
+    };
+    try {
+      await axiosInstance.post("/auth/register", user);
       navigate("/login");
-    } catch(err){
+    } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
@@ -41,7 +41,7 @@ const Signup = () => {
     <Container>
       <Nav>
         <a href="/">
-          <img src={PF+"/login-logo.svg"} alt="logo" />
+          <img src={PF + "/login-logo.svg"} alt="logo" />
         </a>
         <div>
           <Join href="/signup">Join now</Join>
@@ -53,39 +53,63 @@ const Signup = () => {
           <h1>Welcome to your professional community</h1>
           <Form onSubmit={handleClick}>
             <div>
-              <Input type="text" required placeholder="Username" ref={username}/>
+              <Input
+                type="text"
+                required
+                placeholder="Username"
+                ref={username}
+              />
             </div>
             <div>
-              <Input type="email" required placeholder="Email" ref={email}/>
+              <Input type="email" required placeholder="Email" ref={email} />
             </div>
             <div>
-              <Input type="password" required minLength="6" placeholder="Password" ref={password}/>
+              <Input
+                type="password"
+                required
+                minLength="6"
+                placeholder="Password"
+                ref={password}
+              />
             </div>
             <div>
-              <Input type="text" required placeholder="address" ref={address}/>
+              <Input type="text" required placeholder="address" ref={address} />
             </div>
             <div>
-              <Input type="text" required placeholder="name" ref={name}/>
+              <Input type="text" required placeholder="name" ref={name} />
             </div>
             <div>
-              <Input type="number" required placeholder="phone_no" ref={phone_no}/>
+              <Input
+                type="number"
+                required
+                placeholder="phone_no"
+                ref={phone_no}
+              />
             </div>
             <div>
-              <Input type="text" required placeholder="qualification" ref={qualification}/>
+              <Input
+                type="text"
+                required
+                placeholder="qualification"
+                ref={qualification}
+              />
             </div>
             <div>
-              <Input type="number" required placeholder="experience" ref={experience}/>
+              <Input
+                type="number"
+                required
+                placeholder="experience"
+                ref={experience}
+              />
             </div>
             <div>
-              <Button type="submit">
-                Sign Up
-              </Button>
+              <Button type="submit">Sign Up</Button>
             </div>
           </Form>
-          <a href="/login" style={{textDecoration:"none"}}>
-          <p>Already have an account? Login In</p>
+          <a href="/login" style={{ textDecoration: "none" }}>
+            <p>Already have an account? Login In</p>
           </a>
-          <img src={PF+"/login-hero.svg"} alt="hero" />
+          <img src={PF + "/login-hero.svg"} alt="hero" />
         </Hero>
       </Section>
     </Container>
@@ -140,7 +164,7 @@ const SignIn = styled.a`
   line-height: 40px;
   padding: 10px 24px;
   text-align: center;
-  text-decoration:none;
+  text-decoration: none;
   background-color: rgba(0, 0, 0, 0);
   &:hover {
     background-color: rgba(112, 181, 249, 0.15);
@@ -199,7 +223,7 @@ const Hero = styled.div`
 `;
 
 const Form = styled.form`
-margin-top:8%;
+  margin-top: 8%;
 `;
 
 const Input = styled.input`
@@ -209,7 +233,7 @@ const Input = styled.input`
   border-radius: 4px;
   border: 0;
   color: #3e3e3e;
-  margin:10px 0;
+  margin: 10px 0;
   font-size: 16px;
 `;
 
@@ -218,11 +242,11 @@ const Button = styled.button`
   border: none;
   width: 42.5%;
   text-align: center;
-  font-size:16px;
+  font-size: 16px;
   padding: 14px;
   border-radius: 4px;
   color: white;
-  margin:10px 0;
+  margin: 10px 0;
 `;
 
 export default Signup;

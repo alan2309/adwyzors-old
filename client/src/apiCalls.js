@@ -1,4 +1,5 @@
 import axiosInstance from "./axios";
+import RoleConstant from "./constants/RoleConstants";
 
 export const loginCall = async (userCredential, dispatch) => {
   dispatch({ type: "LOGIN_START" });
@@ -13,7 +14,13 @@ export const loginCall = async (userCredential, dispatch) => {
     } else {
       alert("No jwt token found");
     }
-    dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+    let data = res.data;
+    data = {
+      ...data,
+      auth: true,
+      userRole: RoleConstant.STUDENT,
+    };
+    dispatch({ type: "LOGIN_SUCCESS", payload: data });
   } catch (err) {
     dispatch({ type: "LOGIN_FAILURE", payload: err });
   }

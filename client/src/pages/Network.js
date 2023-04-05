@@ -1,4 +1,4 @@
-import Header from "../components/Home/Header";
+import Header from "../components/Common/Header";
 import styled from "styled-components";
 import LeftSide from "../components/Network/LeftSide";
 import Main from "../components/Network/Main";

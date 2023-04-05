@@ -18,6 +18,7 @@ import JobDetail from "./pages/JobDetail";
 import Jobs from "./pages/Jobs";
 import Messaging from "./pages/Messaging";
 import Home from "./pages/Home";
+import Header from "./components/Common/Header";
 
 const Assembler = () => {
   const { user } = useContext(AuthContext);
@@ -76,6 +77,7 @@ const Assembler = () => {
         ) : (
           <></>
         )}*/}
+        <Header />
         <Routes>
           {routes.map((route, key) => (
             <Route

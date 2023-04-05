@@ -5,7 +5,6 @@ import { AuthContext } from "../../context/AuthContext";
 
 const Header = ({ page }) => {
   const { user, dispatch } = useContext(AuthContext);
-
   const activeClass = page === "home" ? "active" : "";
   const activeClass2 = page === "network" ? "active" : "";
   const activeClass3 = page === "messaging" ? "active" : "";

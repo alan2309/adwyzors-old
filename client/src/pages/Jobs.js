@@ -1,5 +1,5 @@
 import React from 'react'
-import Header from "../components/Home/Header";
+import Header from "../components/Common/Header";
 import styled from "styled-components";
 import CandJob from '../components/Job/CandJob';
 import CompJob from '../components/Job/CompJob';

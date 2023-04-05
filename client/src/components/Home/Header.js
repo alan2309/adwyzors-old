@@ -1,17 +1,15 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import {AuthContext} from '../../context/AuthContext'
+import { AuthContext } from "../../context/AuthContext";
 
+const Header = ({ page }) => {
+  const { user, dispatch } = useContext(AuthContext);
 
-const Header = ({page}) => {
-
-  const {user} = useContext(AuthContext)
-
-  const activeClass = page === 'home' ? 'active' : '';
-  const activeClass2 = page === 'network' ? 'active' : '';
-  const activeClass3 = page === 'messaging' ? 'active' : '';
-  const activeClass4 = page === 'jobs'?'active':'';
+  const activeClass = page === "home" ? "active" : "";
+  const activeClass2 = page === "network" ? "active" : "";
+  const activeClass3 = page === "messaging" ? "active" : "";
+  const activeClass4 = page === "jobs" ? "active" : "";
 
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
@@ -20,7 +18,7 @@ const Header = ({page}) => {
       <Content>
         <Logo>
           <a href="/">
-            <img src={PF+"/home-logo.svg"} alt="logo" />
+            <img src={PF + "/home-logo.svg"} alt="logo" />
           </a>
         </Logo>
         <Search>
@@ -28,38 +26,66 @@ const Header = ({page}) => {
             <input type="text" placeholder="Search" />
           </div>
           <SearchIcon>
-            <img src={PF+"/search-icon.svg"} alt="icon" />
+            <img src={PF + "/search-icon.svg"} alt="icon" />
           </SearchIcon>
         </Search>
         <Nav>
           <NavListWrap>
             <NavList className={activeClass}>
               <Link to="/">
-                <img src={activeClass==="active"?(PF+"/nav-home-active.svg"):(PF+"/nav-home.svg")} alt="icon" />
+                <img
+                  src={
+                    activeClass === "active"
+                      ? PF + "/nav-home-active.svg"
+                      : PF + "/nav-home.svg"
+                  }
+                  alt="icon"
+                />
                 <span>Home</span>
               </Link>
             </NavList>
             <NavList className={activeClass2}>
               <Link to="/network">
-                <img src={activeClass2==="active"?(PF+"/nav-network-active.svg"):(PF+"/nav-network.svg")} alt="icon" />
+                <img
+                  src={
+                    activeClass2 === "active"
+                      ? PF + "/nav-network-active.svg"
+                      : PF + "/nav-network.svg"
+                  }
+                  alt="icon"
+                />
                 <span>My Network</span>
               </Link>
             </NavList>
             <NavList className={activeClass4}>
-            <Link to="/jobs">
-                <img src={activeClass4==="active"?(PF+"/nav-jobs-active.svg"):(PF+"/nav-jobs.svg")} alt="icon" />
+              <Link to="/jobs">
+                <img
+                  src={
+                    activeClass4 === "active"
+                      ? PF + "/nav-jobs-active.svg"
+                      : PF + "/nav-jobs.svg"
+                  }
+                  alt="icon"
+                />
                 <span>Jobs</span>
-            </Link>
+              </Link>
             </NavList>
             <NavList className={activeClass3}>
               <Link to="/messaging">
-                <img src={activeClass3==="active"?(PF+"/nav-messaging-active.svg"):(PF+"/nav-messaging.svg")} alt="icon" />
+                <img
+                  src={
+                    activeClass3 === "active"
+                      ? PF + "/nav-messaging-active.svg"
+                      : PF + "/nav-messaging.svg"
+                  }
+                  alt="icon"
+                />
                 <span>Messaging</span>
               </Link>
             </NavList>
             <NavList>
               <a>
-                <img src={PF+"/nav-notifications.svg"} alt="icon" />
+                <img src={PF + "/nav-notifications.svg"} alt="icon" />
                 <span>Notifications</span>
               </a>
             </NavList>
@@ -68,20 +94,27 @@ const Header = ({page}) => {
                 <img src={user.profilePicture || PF + "/user.svg"} alt="user" />
                 <span>
                   Me
-                  <img src={PF+"/down-icon.svg"} alt="arrow" />
+                  <img src={PF + "/down-icon.svg"} alt="arrow" />
                 </span>
               </a>
 
               <Signout>
-                <a href="/login">Sign Out</a>
+                <a
+                  href="/login"
+                  onClick={() => {
+                    dispatch({ type: "LOGOUT", payload: null });
+                  }}
+                >
+                  Sign Out
+                </a>
               </Signout>
             </User>
             <Work>
               <a>
-                <img src={PF+"/nav-work.svg"} alt="work" />
+                <img src={PF + "/nav-work.svg"} alt="work" />
                 <span>
                   Work
-                  <img src={PF+"/down-icon.svg"} alt="arrow" />
+                  <img src={PF + "/down-icon.svg"} alt="arrow" />
                 </span>
               </a>
             </Work>
@@ -223,7 +256,7 @@ const NavList = styled.li`
   &:hover,
   &:active {
     a {
-      span{
+      span {
         color: rgba(0, 0, 0, 0.9);
       }
     }

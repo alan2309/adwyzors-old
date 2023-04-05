@@ -31,7 +31,6 @@ const Messaging = () => {
   return (
     <>
       <Container>
-        <Header page={"messaging"} />
         <Layout>
           <LeftSide
             conversations={conversations}

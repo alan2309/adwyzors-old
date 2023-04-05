@@ -8,7 +8,6 @@ const Home = () => {
   return (
     <>
     <Container>
-      <Header page={"home"}/>
       <Layout>
         <LeftSide />
         <Main />

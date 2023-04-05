@@ -7,8 +7,8 @@ const Header = ({ page }) => {
   const { user, dispatch } = useContext(AuthContext);
   const activeClass = page === "home" ? "active" : "";
   const activeClass2 = page === "network" ? "active" : "";
-  const activeClass3 = page === "messaging" ? "active" : "";
-  const activeClass4 = page === "jobs" ? "active" : "";
+  const activeClass3 = page === "jobs" ? "active" : "";
+  const activeClass4 = page === "messaging" ? "active" : "";
 
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
@@ -56,11 +56,11 @@ const Header = ({ page }) => {
                 <span>My Network</span>
               </Link>
             </NavList>
-            <NavList className={activeClass4}>
+            <NavList className={activeClass3}>
               <Link to="/jobs">
                 <img
                   src={
-                    activeClass4 === "active"
+                    activeClass3 === "active"
                       ? PF + "/nav-jobs-active.svg"
                       : PF + "/nav-jobs.svg"
                   }
@@ -69,11 +69,11 @@ const Header = ({ page }) => {
                 <span>Jobs</span>
               </Link>
             </NavList>
-            <NavList className={activeClass3}>
+            <NavList className={activeClass4}>
               <Link to="/messaging">
                 <img
                   src={
-                    activeClass3 === "active"
+                    activeClass4 === "active"
                       ? PF + "/nav-messaging-active.svg"
                       : PF + "/nav-messaging.svg"
                   }

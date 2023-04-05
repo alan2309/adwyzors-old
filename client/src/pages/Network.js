@@ -7,7 +7,6 @@ const Network = () => {
   return (
     <>
     <Container>
-      <Header page={"network"}/>
       <Layout>
         <LeftSide />
         <Main />

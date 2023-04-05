@@ -7,7 +7,6 @@ import CompJob from '../components/Job/CompJob';
 function Jobs() {
   return (
     <Container>
-        <Header page={"home"}/>
         <Layout>
            <CompJob/>
         </Layout>

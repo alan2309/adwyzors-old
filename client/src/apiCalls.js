@@ -1,5 +1,5 @@
 import axiosInstance from "./axios";
-import RoleConstant from "./constants/RoleConstants";
+import RoleConstants from "./constants/RoleConstants";
 
 export const loginCall = async (userCredential, dispatch) => {
   dispatch({ type: "LOGIN_START" });
@@ -18,7 +18,7 @@ export const loginCall = async (userCredential, dispatch) => {
     data = {
       ...data,
       auth: true,
-      userRole: RoleConstant.STUDENT,
+      userRole: RoleConstants.EMPLOYEE,
     };
     dispatch({ type: "LOGIN_SUCCESS", payload: data });
   } catch (err) {

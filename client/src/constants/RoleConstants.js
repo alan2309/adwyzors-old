@@ -1,6 +1,6 @@
 export default class RoleConstants {
   static NONE = "";
-  static STUDENT = "student";
+  static EMPLOYEE = "employee";
   static ADMIN = "admin";
   static TEACHER = "company";
   static ALL = "all";

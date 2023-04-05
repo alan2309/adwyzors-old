@@ -45,22 +45,22 @@ const Assembler = () => {
     {
       route: RouteConstants.NETWORK_PAGE,
       component: <Network />,
-      access: RoleConstants.STUDENT,
+      access: RoleConstants.EMPLOYEE,
     },
     {
       route: RouteConstants.MESSAGING_PAGE,
       component: <Messaging />,
-      access: RoleConstants.STUDENT,
+      access: RoleConstants.EMPLOYEE,
     },
     {
       route: RouteConstants.JOB_DETAILS_PAGE,
       component: <JobDetail />,
-      access: RoleConstants.STUDENT,
+      access: RoleConstants.EMPLOYEE,
     },
     {
       route: RouteConstants.JOBS_PAGE,
       component: <Jobs />,
-      access: RoleConstants.STUDENT,
+      access: RoleConstants.EMPLOYEE,
     },
   ];
 
@@ -71,7 +71,7 @@ const Assembler = () => {
         {user.userRole === RoleConstants.TEACHER ||
         user.userRole === RoleConstants.ADMIN ? (
           <TeacherNavBar />
-        ) : user.userRole == RoleConstants.STUDENT ? (
+        ) : user.userRole == RoleConstants.EMPLOYEE ? (
           <StudentNavBar />
         ) : (
           <></>

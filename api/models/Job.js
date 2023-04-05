@@ -3,9 +3,16 @@ const { ObjectId } = mongoose.Schema.Types;
 
 const jobSchema = new mongoose.Schema(
     {
+      title:{
+        type:String,
+        required:true,
+      },
       company_id:{
         type:String,
         required:true
+      },
+      company_pic:{
+        type:String,
       },
       desc: {
         type: String,

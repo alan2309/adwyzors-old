@@ -1,8 +1,12 @@
 import { createContext, useEffect, useReducer } from "react";
 import AuthReducer from "./AuthReducer.js";
+import RoleConstants from "../constants/RoleConstants.js";
 
 const INITIAL_STATE = {
-  user: JSON.parse(localStorage.getItem("user")) || null,
+  user: JSON.parse(localStorage.getItem("user")) || {
+    auth: false,
+    userRole: RoleConstants.NONE,
+  },
   isFetching: false,
   error: false,
 };

@@ -1,20 +1,28 @@
+import RoleConstants from "../constants/RoleConstants";
+
 const AuthReducer = (state, action) => {
   switch (action.type) {
     case "LOGIN_START":
       return {
-        user: null,
+        user: {
+          auth: false,
+          userRole: RoleConstants.NONE,
+        },
         isFetching: true,
         error: false,
       };
     case "LOGIN_SUCCESS":
       return {
-        user: action.payload,
+        user: action.payload, //Set user role and auth
         isFetching: false,
         error: false,
       };
     case "LOGIN_FAILURE":
       return {
-        user: null,
+        user: {
+          auth: false,
+          userRole: RoleConstants.NONE,
+        },
         isFetching: false,
         error: true,
       };
@@ -35,6 +43,15 @@ const AuthReducer = (state, action) => {
             (following) => following !== action.payload
           ),
         },
+      };
+    case "LOGOUT":
+      return {
+        user: {
+          auth: false,
+          userRole: RoleConstants.NONE,
+        },
+        isFetching: false,
+        error: false,
       };
     default:
       return state;

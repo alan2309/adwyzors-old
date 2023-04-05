@@ -2,10 +2,10 @@ import styled from "styled-components";
 import React, { useEffect, useState, useContext, useRef } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import Chat from "./Chat";
-import axios from "axios";
 import { io } from "socket.io-client";
+import axiosInstance from "../../axios";
 
-const Main = ({ currentChat }) => {
+const Main = ({  currentChat }) => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [arrivalMessage, setArrivalMessage] = useState(null);
@@ -20,14 +20,14 @@ const Main = ({ currentChat }) => {
         const receiverId = await currentChat?.members.find(
           (member) => member !== user._id
         );
-        const res = await axios.get("/users?userId=" + receiverId);
+        const res = await axiosInstance.get("/users?userId=" + receiverId);
         setFriend(res.data);
       } catch (err) {
         console.log(err);
       }
     };
     currentChat && getFriend();
-  }, [currentChat?.members]);
+  }, [currentChat?.members, currentChat, user._id]);
 
   useEffect(() => {
     socket.current = io("ws://localhost:8900");
@@ -56,7 +56,7 @@ const Main = ({ currentChat }) => {
   useEffect(() => {
     const getMessages = async () => {
       try {
-        const res = await axios.get("/messages/" + currentChat?._id);
+        const res = await axiosInstance.get("/messages/" + currentChat?._id);
         setMessages(res.data);
       } catch (err) {
         console.log(err);
@@ -84,7 +84,7 @@ const Main = ({ currentChat }) => {
     });
 
     try {
-      const res = await axios.post("/messages", message);
+      const res = await axiosInstance.post("/messages", message);
       setMessages([...messages, res.data]);
       setNewMessage("");
     } catch (err) {
@@ -176,16 +176,16 @@ const HText = styled.div`
   }
 `;
 
-const CommonCard = styled.div`
-  text-align: center;
-  overflow: hidden;
-  margin-bottom: 8px;
-  background-color: #fff;
-  border-radius: 0 5px 5px 0;
-  position: relative;
-  border: none;
-  box-shadow: 0 0 0 1px rgb(0 0 0 / 15%), 0 0 0 rgb(0 0 0 / 20%);
-`;
+//const CommonCard = styled.div`
+//  text-align: center;
+//  overflow: hidden;
+//  margin-bottom: 8px;
+//  background-color: #fff;
+//  border-radius: 0 5px 5px 0;
+//  position: relative;
+//  border: none;
+//  box-shadow: 0 0 0 1px rgb(0 0 0 / 15%), 0 0 0 rgb(0 0 0 / 20%);
+//`;
 const Body = styled.div`
   margin-top: 1px;
   flex: 5.5;

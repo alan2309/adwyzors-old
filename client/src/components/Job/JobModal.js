@@ -4,6 +4,7 @@ import React, { useRef, useState } from "react";
 const JobModal = (props) => {
   const desc = useRef();
   const ctc = useRef();
+  const title = useRef();
   const requirements = useRef();
   const [req, setReq] = useState([]);
   //const { user } = useContext(AuthContext);
@@ -18,6 +19,7 @@ const JobModal = (props) => {
     <>
       {props.showModal && (
         <>
+        <input type="text" placeholder="Title" ref={title} />
           <input type="text" placeholder="desc" ref={desc} />
           <input type="text" placeholder="ctc" ref={ctc} />
           <input type="text" placeholder="requirements" ref={requirements} />
@@ -28,7 +30,7 @@ const JobModal = (props) => {
               return <li>{r}</li>;
             })}
           </ol>
-          <button onClick={(e) => props.submitHandler(e, desc, ctc, req)}>
+          <button onClick={(e) => props.submitHandler(e,title, desc, ctc, req)}>
             Submit
           </button>
         </>

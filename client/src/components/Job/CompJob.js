@@ -14,6 +14,7 @@ function CompJob() {
         .get(`/jobs/${user._id}`)
         .then((res) => {
           setJobs(res.data);
+          console.log(res.data)
         })
         .catch((e) => console.log(e));
     };
@@ -21,10 +22,11 @@ function CompJob() {
     data();
   }, [user._id]);
 
-  const submitHandler = async (e, desc, ctc, req) => {
+  const submitHandler = async (e,title, desc, ctc, req) => {
     e.preventDefault();
     const newJob = {
       company_id: user._id,
+      title:title.current.value,
       desc: desc.current.value,
       ctc: ctc.current.value,
       requirements: req,
@@ -42,7 +44,8 @@ function CompJob() {
       <ol>
         {jobs.map((job) => {
           return (
-            <li onClick={(e) => naviagte(`/jobs/details/${job._id}`)}>
+            <li key={job._id} onClick={(e) => naviagte(`/jobs/details/${job._id}`)}>
+              <h2>{job.title}</h2>
               {job.desc}
               <ul>
                 {job.requirements.map((req) => {

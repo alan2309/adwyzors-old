@@ -5,7 +5,7 @@ import Chat from "./Chat";
 import { io } from "socket.io-client";
 import axiosInstance from "../../axios";
 
-const Main = ({  currentChat }) => {
+const Main = ({ currentChat }) => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [arrivalMessage, setArrivalMessage] = useState(null);
@@ -30,7 +30,7 @@ const Main = ({  currentChat }) => {
   }, [currentChat?.members, currentChat, user._id]);
 
   useEffect(() => {
-    socket.current = io("ws://localhost:8900");
+    socket.current = io("ws://localhost:8800");
     socket.current.on("getMessage", (data) => {
       setArrivalMessage({
         sender: data.senderId,
@@ -49,7 +49,7 @@ const Main = ({  currentChat }) => {
   useEffect(() => {
     socket.current.emit("addUser", user._id);
     socket.current.on("getUsers", (users) => {
-      // console.log(users);
+      console.log(users);
     });
   }, [user]);
 

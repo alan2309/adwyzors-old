@@ -5,16 +5,16 @@ export const loginCall = async (userCredential, dispatch) => {
   dispatch({ type: "LOGIN_START" });
   try {
     const res = await axiosInstance.post("/auth/login", userCredential);
-    console.log(res.data);
+    console.log(res.data.user);
     if (res.data?.token) {
-      let acc_token = "JWT " + res.data.token.access;
+      let acc_token = "Bearer " + res.data.token.access;
       axiosInstance.defaults.headers["Authorization"] = acc_token;
-      sessionStorage.setItem("access_token", res.data.token.access);
-      sessionStorage.setItem("refresh_token", res.data.token.refresh);
+      localStorage.setItem("access_token", res.data.token.access);
+      localStorage.setItem("refresh_token", res.data.token.refresh);
     } else {
       alert("No jwt token found");
     }
-    let data = res.data;
+    let data = res.data.user;
     data = {
       ...data,
       auth: true,

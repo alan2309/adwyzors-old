@@ -63,6 +63,10 @@ const userSchema = new mongoose.Schema(
     following:{
       type:Array
     },
+    // userRole:{
+    //   type:String,
+    //   required:true
+    // }
   },
   { timestamps: true }
 );

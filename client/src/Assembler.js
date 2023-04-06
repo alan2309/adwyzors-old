@@ -18,7 +18,8 @@ import JobDetail from "./pages/JobDetail";
 import Jobs from "./pages/Jobs";
 import Messaging from "./pages/Messaging";
 import Home from "./pages/Home";
-import Header from "./components/Common/Header";
+import Posts from "./pages/Employee/Posts";
+import NewHeader from "./components/Common/NewHeader";
 
 const Assembler = () => {
   const { user } = useContext(AuthContext);
@@ -63,6 +64,11 @@ const Assembler = () => {
       component: <Jobs />,
       access: RoleConstants.EMPLOYEE,
     },
+    {
+      route: RouteConstants.EMP_JOBS_PAGE,
+      component: <Posts />,
+      access: RoleConstants.ALL,
+    },
   ];
 
   return (
@@ -77,7 +83,8 @@ const Assembler = () => {
         ) : (
           <></>
         )}*/}
-        <Header />
+        {/*<Header />*/}
+        <NewHeader />
         <Routes>
           {routes.map((route, key) => (
             <Route
@@ -85,8 +92,8 @@ const Assembler = () => {
               exact
               key={key}
               element={
-                <Row>
-                  <Col>
+                <Row style={{ margin: 0, padding: 0 }}>
+                  <Col style={{ margin: 0, padding: 0 }}>
                     <ValidationComponent
                       access={route.access}
                       component={route.component}
